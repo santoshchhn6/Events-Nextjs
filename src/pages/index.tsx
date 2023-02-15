@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
+// import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ data }: { data: [] }) {
   return (
     <>
       <Head>
@@ -23,40 +23,35 @@ export default function Home() {
         </nav>
       </header>
       <main className={styles.main}>
-        <a href="">
-          <img src="" alt="" />
-          <h2>Events in Landon</h2>
-          <p>
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-            below for those interested. Sections 1.10.32 and 1.10.33 from "de
-            Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-            exact original form, accompanied by English versions from the 1914
-            translation by H. Rackham.
-          </p>
-        </a>
-        <a href="">
-          <img src="" alt="" />
-          <h2>Events in Barcelona</h2>
-          <p>
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-            below for those interested. Sections 1.10.32 and 1.10.33 from "de
-            Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-            exact original form, accompanied by English versions from the 1914
-            translation by H. Rackham.
-          </p>
-        </a>
-        <a href="">
-          <img src="" alt="" />
-          <h2>Events in San Francisco</h2>
-          <p>
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-            below for those interested. Sections 1.10.32 and 1.10.33 from "de
-            Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-            exact original form, accompanied by English versions from the 1914
-            translation by H. Rackham.
-          </p>
-        </a>
+        {data.map(
+          (
+            e: {
+              id: string;
+              title: string;
+              description: string;
+              image: string;
+            },
+            i
+          ) => (
+            <a key={i} href={`/events/${e.id}`}>
+              <Image width={200} height={200} src={e.image} alt="" />
+              <h2>{e.title}</h2>
+              <p>{e.description}</p>
+            </a>
+          )
+        )}
       </main>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const { events_categories } = await import("../../data/data.json");
+  console.log(events_categories);
+
+  return {
+    props: {
+      data: events_categories,
+    },
+  };
 }
