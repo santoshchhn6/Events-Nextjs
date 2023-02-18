@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const EventPerCity = ({ data }: { data: [] }) => {
+const EventPerCity = ({ data, pageName }: { data: []; pageName: string }) => {
   return (
     <div>
-      <h1>Event in Landon</h1>
+      <h1>Event in {pageName.toUpperCase()}</h1>
       <div>
         {data.map(
           (
@@ -17,11 +18,11 @@ const EventPerCity = ({ data }: { data: [] }) => {
             },
             i
           ) => (
-            <a key={i} href={`/events/${e.city}/${e.id}`}>
+            <Link key={i} href={`/events/${e.city}/${e.id}`}>
               <Image src={e.image} alt={e.title} width={200} height={200} />
               <h2>{e.title}</h2>
               <p>{e.description}</p>
-            </a>
+            </Link>
           )
         )}
       </div>
@@ -42,10 +43,10 @@ export async function getStaticPaths() {
   return { paths: allPaths, fallback: false };
 }
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps(context: { params: { cat: string } }) {
   const id = context?.params.cat;
   const { allEvents } = await import("../../../../data/data.json");
   const data = allEvents.filter((e) => e.city === id);
   console.log(data);
-  return { props: { data } };
+  return { props: { data, pageName: id } };
 }
