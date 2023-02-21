@@ -1,49 +1,15 @@
+import EventCard from "@/components/events/EventCard";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
 const EventPerCity = ({ data, pageName }: { data: []; pageName: string }) => {
-  
   return (
     <div className="p-5 flex flex-col items-center">
-      <h1 className="text-gray-700 font-bold text-lg mb-5">
+      <h1 className="text-gray-700 font-bold text-lg ">
         Event in {pageName.toUpperCase()}
       </h1>
-      <div className="flex flex-row flex-wrap justify-center gap-5 m-5">
-        {data.map(
-          (
-            e: {
-              id: string;
-              city: string;
-              image: string;
-              title: string;
-              description: string;
-            },
-            i
-          ) => (
-            <Link
-              key={i}
-              href={`/events/${e.city}/${e.id}`}
-              className=" w-[300px]"
-            >
-              <div className="w-fit h-[200px] overflow-hidden object-fill">
-                <Image
-                  width={1920}
-                  height={1080}
-                  src={e.image}
-                  alt=""
-                  className="w-fit"
-                />
-              </div>
-
-              <h2 className="mt-2 text-lg font-bold text-gray-600">
-                {e.title}
-              </h2>
-              <p className="mt-2 text-gray-500">{e.description}</p>
-            </Link>
-          )
-        )}
-      </div>
+      <EventCard data={data} />
     </div>
   );
 };
