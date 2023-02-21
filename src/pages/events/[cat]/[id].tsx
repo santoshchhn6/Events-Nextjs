@@ -7,11 +7,20 @@ const EventPage = ({
   data: { image: string; title: string; description: string };
 }) => {
   return (
-    <div>
-      {" "}
-      <Image src={data.image} alt={data.title} width={1000} height={600} />
-      <h2>{data.title}</h2>
-      <p>{data.description}</p>
+    <div className="flex justify-center">
+      <div className=" w-[1000px] mb-10">
+        <div className="w-fit h-[500px] overflow-hidden object-fill">
+          <Image
+            src={data.image}
+            alt={data.title}
+            width={1920}
+            height={1080}
+            className="w-fit"
+          />
+        </div>
+        <h2 className="mt-2 text-lg font-bold text-gray-600">{data.title}</h2>
+        <p className="mt-2 text-gray-500">{data.description}</p>
+      </div>
     </div>
   );
 };

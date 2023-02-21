@@ -2,9 +2,9 @@ import React from "react";
 
 const About = () => {
   return (
-    <div>
-      <h1>About Us</h1>
-      <p>
+    <div className="p-10 ">
+      <h2 className="text-gray-700 font-bold text-lg mb-5">About Us</h2>
+      <p className="text-gray-600">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

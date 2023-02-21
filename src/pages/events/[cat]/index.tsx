@@ -4,9 +4,11 @@ import React from "react";
 
 const EventPerCity = ({ data, pageName }: { data: []; pageName: string }) => {
   return (
-    <div>
-      <h1>Event in {pageName.toUpperCase()}</h1>
-      <div>
+    <div className="p-5 flex flex-col items-center">
+      <h1 className="text-gray-700 font-bold text-lg mb-5">
+        Event in {pageName.toUpperCase()}
+      </h1>
+      <div className="flex flex-row flex-wrap justify-center gap-5 m-5">
         {data.map(
           (
             e: {
@@ -18,10 +20,25 @@ const EventPerCity = ({ data, pageName }: { data: []; pageName: string }) => {
             },
             i
           ) => (
-            <Link key={i} href={`/events/${e.city}/${e.id}`}>
-              <Image src={e.image} alt={e.title} width={200} height={200} />
-              <h2>{e.title}</h2>
-              <p>{e.description}</p>
+            <Link
+              key={i}
+              href={`/events/${e.city}/${e.id}`}
+              className=" w-[300px]"
+            >
+              <div className="w-fit h-[200px] overflow-hidden object-fill">
+                <Image
+                  width={1920}
+                  height={1080}
+                  src={e.image}
+                  alt=""
+                  className="w-fit"
+                />
+              </div>
+
+              <h2 className="mt-2 text-lg font-bold text-gray-600">
+                {e.title}
+              </h2>
+              <p className="mt-2 text-gray-500">{e.description}</p>
             </Link>
           )
         )}
