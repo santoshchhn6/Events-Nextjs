@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const style = {
-  btn: "border-blue-400 h-12 p-2 flex items-center text-gray-500 text-xl hover:bg-blue-100 hover:border-b-4 hover:text-blue-400",
+  active: "border-blue-400 bg-blue-100 border-b-4 text-blue-400",
+  btn: "h-12 p-2 flex items-center text-gray-500 text-xl border-blue-400 hover:bg-blue-100 hover:border-b-4 hover:text-blue-400",
 };
 
 const Header = () => {
+  const [active, setActive] = useState("home");
   return (
     <header>
       <nav className="border pl-10 flex ">
@@ -15,13 +17,25 @@ const Header = () => {
           alt=""
           className=""
         ></Image> */}
-        <Link className={style.btn} href="/">
+        <Link
+          className={style.btn + (active === "home" ? style.active : "")}
+          href="/"
+          onClick={() => setActive("home")}
+        >
           Home
         </Link>
-        <Link className={style.btn} href="/events">
+        <Link
+          className={style.btn + (active === "events" ? style.active : "")}
+          href="/events"
+          onClick={() => setActive("events")}
+        >
           Events
         </Link>
-        <Link className={style.btn} href="/about">
+        <Link
+          className={style.btn + (active === "about" ? style.active : "")}
+          href="/about"
+          onClick={() => setActive("about")}
+        >
           About us
         </Link>
       </nav>

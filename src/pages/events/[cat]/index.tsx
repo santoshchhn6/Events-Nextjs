@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const EventPerCity = ({ data, pageName }: { data: []; pageName: string }) => {
+  
   return (
     <div className="p-5 flex flex-col items-center">
       <h1 className="text-gray-700 font-bold text-lg mb-5">
